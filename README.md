@@ -1,0 +1,1 @@
+This CLI tool utilizes FXRatesAPI's API to allow the user to convert a monetary value from one currency into 175+ other currencies including cryptocurrencies. To use the tool, simply enter into the terminal "java -jar CurrencyConverter.jar VALUE CURRENCYCODE1 CURRENCYCODE2".
