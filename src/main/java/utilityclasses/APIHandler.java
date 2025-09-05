@@ -11,8 +11,8 @@ public final class APIHandler {
     private static final HttpClient CLIENT = HttpClient.newBuilder().build();
 
     /**
-     * getConversionResult formats and returns the response given by the currency converter server via a GET request
-     * sent through Java's HttpClient API
+     * getConversionResult returns the desired result from the response given by the currency converter server via a GET
+     * request sent through Java's HttpClient API
      *
      * @param value                     A monetary value
      * @param code1                     The currency code of the country to convert from
@@ -23,8 +23,7 @@ public final class APIHandler {
      */
     public static String getConversionResult(double value, String code1, String code2)
             throws IOException, InterruptedException {
-        return value + " " + code1 + " is "
-                + getResultFromServerResponse(getConverterServerResponse(value, code1, code2)) + " " + code2 + ".";
+        return getResultFromServerResponse(getConverterServerResponse(value, code1, code2));
     }
 
     private static String getResultFromServerResponse(String serverResponse) {
