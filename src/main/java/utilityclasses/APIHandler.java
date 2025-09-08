@@ -23,25 +23,15 @@ public final class APIHandler {
      */
     public static String getConversionResult(double value, String code1, String code2)
             throws IOException, InterruptedException {
-        return getResultFromServerResponse(getConverterServerResponse(value, code1, code2));
-    }
-
-    private static String getResultFromServerResponse(String serverResponse) {
-        final String[] RESULTS = serverResponse.split("\t");
-        return RESULTS[RESULTS.length-1].trim();
-    }
-
-    private static String getConverterServerResponse(double value, String currencyCode1, String currencyCode2)
-            throws IOException, InterruptedException {
-        return getServerResponseAsString(buildHttpGETRequest(ConverterURLBuilder.getBuiltURL(currencyCode1, currencyCode2, value)));
-    }
-
-    private static String getServerResponseAsString(HttpRequest httpRequest) throws IOException, InterruptedException {
-        return CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
-    }
-
-    private static HttpRequest buildHttpGETRequest(String URL) {
-        return HttpRequest.newBuilder(URI.create(URL)).GET().build();
+        //Build the GET request to be sent to the currency converter server
+        final HttpRequest GET_REQUEST = HttpRequest.newBuilder()
+                .uri(URI.create(ConverterURLBuilder.getBuiltURL(code1, code2, value)))
+                .GET()
+                .build();
+        //Send the GET request and store the tab-separated server response as a String array
+        final String[] RESPONSE_CATEGORIES = CLIENT.send(GET_REQUEST, HttpResponse.BodyHandlers.ofString()).body().split("\t");
+        //return the result from the server response
+        return RESPONSE_CATEGORIES[RESPONSE_CATEGORIES.length-1].trim();
     }
 
 }
