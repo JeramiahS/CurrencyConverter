@@ -11,7 +11,7 @@ public final class APIHandler {
     private static final HttpClient CLIENT = HttpClient.newBuilder().build();
 
     /**
-     * getConversionResult returns the desired result from the response given by the currency converter server via a GET
+     * Returns the desired result from the response given by the currency converter server via a GET
      * request sent through Java's HttpClient API
      *
      * @param value                     A monetary value

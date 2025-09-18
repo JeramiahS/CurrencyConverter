@@ -4,7 +4,7 @@ public final class ConverterURLBuilder {
     private static final String BASE_URL = "https://api.fxratesapi.com/convert";
 
     /**
-     * The getBuiltURL concatenates and returns a URL as a String
+     * Concatenates and returns a URL as a String
      *
      * @param fromCurrencyCode  The currency code of the country to convert from
      * @param toCurrencyCode    The currency code of the country to convert to
