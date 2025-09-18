@@ -21,7 +21,7 @@ public final class APIHandler {
      * @throws IOException              If the connection to the server fails in any way
      * @throws InterruptedException     If the HttpClient.send() thread gets interrupted in any way
      */
-    public static String getConversionResult(double value, String code1, String code2)
+    public static Double getConversionResult(double value, String code1, String code2)
             throws IOException, InterruptedException {
         //Build the GET request to be sent to the currency converter server
         final HttpRequest GET_REQUEST = HttpRequest.newBuilder()
@@ -30,8 +30,8 @@ public final class APIHandler {
                 .build();
         //Send the GET request and store the tab-separated server response as a String array
         final String[] RESPONSE_CATEGORIES = CLIENT.send(GET_REQUEST, HttpResponse.BodyHandlers.ofString()).body().split("\t");
-        //return the result from the server response
-        return RESPONSE_CATEGORIES[RESPONSE_CATEGORIES.length-1].trim();
+        //return the result from the server response parsed as a double value
+        return Double.parseDouble(RESPONSE_CATEGORIES[RESPONSE_CATEGORIES.length - 1].trim());
     }
 
 }
