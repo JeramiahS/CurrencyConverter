@@ -7,6 +7,9 @@ import java.io.IOException;
 public class Application {
 
     public static void main(String[] args) {
+        if(args[0].contains(",")) {
+            args[0] = args[0].replace(",", "");
+        }
         if(argIsDouble(args[0]) && codesAreThreeChars(args[1], args[2])) {
             try {
                 double value = Double.parseDouble(args[0]);
@@ -26,16 +29,18 @@ public class Application {
             double _ = Double.parseDouble(arg);
             return true;
         } catch(NumberFormatException _) {
-            throw new NumberFormatException("You must enter a numerical value as the first argument (Ex. '10' or '20,00').");
+            System.out.println("You must enter a numerical value as the first argument (Ex. '10' or '20,00').");
         }
+        return false;
     }
 
     private static boolean codesAreThreeChars(String arg1, String arg2) {
         if((arg1.length() == 3 && arg2.length() == 3)) {
             return true;
         } else {
-            throw new IllegalArgumentException("Country codes must 3 characters (Ex. 'USD', 'EUR').");
+            System.out.println("Country codes must 3 characters (Ex. 'USD', 'EUR').");
         }
+        return false;
     }
 
 }
