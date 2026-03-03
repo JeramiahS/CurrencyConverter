@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.jeramiah.utsa.currencyconvertergui.CurrencyConverterController">
+   <children>
+      <Button fx:id="convertButton" layoutX="358.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#getConversionResult" text="Convert">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="amountLabel" layoutX="286.0" layoutY="178.0" text="Amount:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="convertFromLabel" layoutX="243.0" layoutY="215.0" text="Convert From:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="convertToLabel" layoutX="265.0" layoutY="251.0" text="Convert To:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="titleLabel" layoutX="243.0" layoutY="77.0" text="Currency Converter">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="convertFromChoiceBox" layoutX="400.0" layoutY="216.0" onMouseClicked="#getCurrencies" prefWidth="150.0" />
+      <ChoiceBox fx:id="convertToMenu" layoutX="400.0" layoutY="252.0" onMouseClicked="#getCurrencies" prefWidth="150.0" />
+      <TextField fx:id="amountTextField" layoutX="401.0" layoutY="179.0" />
+   </children>
+</Pane>
