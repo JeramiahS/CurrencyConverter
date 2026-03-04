@@ -1,6 +1,7 @@
 module edu.jeramiah.utsa.currencyconvertergui {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.net.http;
 
 
     opens edu.jeramiah.utsa.currencyconvertergui to javafx.fxml;
