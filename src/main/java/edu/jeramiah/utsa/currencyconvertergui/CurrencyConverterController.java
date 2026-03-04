@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
+
 public class CurrencyConverterController {
 
     @FXML
@@ -29,7 +31,7 @@ public class CurrencyConverterController {
     private Label convertToLabel;
 
     @FXML
-    private ChoiceBox<?> convertToMenu;
+    private ChoiceBox<?> convertToChoiceBox;
 
     @FXML
     private Pane mainPane;
@@ -38,13 +40,18 @@ public class CurrencyConverterController {
     private Label titleLabel;
 
     @FXML
-    void getConversionResult(MouseEvent event) {
-
-    }
+    private Label conversionResultTextLabel;
 
     @FXML
-    void getCurrencies(MouseEvent event) {
-
+    void onConvertButtonClick(MouseEvent event) throws IOException, InterruptedException {
+        //TODO: Grab amount from amountTextField
+        //TODO: Grab selection from convertFromChoiceBox
+        //TODO: Grab selection from convertToChoiceBox
+        //TODO: Send GET request to converter server
+        //TODO: Parse response JSON
+        //TODO: Display parsed result in GUI
+        //HTTPHandler.sendConversionRequest(amountTextField.getText(), convertFromChoiceBox.getAccessibleText(), convertToMenu.getAccessibleText());
+        conversionResultTextLabel.setText("Conversion Result Placeholder");
+        conversionResultTextLabel.setVisible(true);
     }
-
 }
