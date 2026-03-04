@@ -6,7 +6,7 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.jeramiah.utsa.currencyconvertergui.CurrencyConverterController">
    <children>
-      <Button fx:id="convertButton" layoutX="358.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#getConversionResult" text="Convert">
+      <Button fx:id="convertButton" layoutX="358.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#onConvertButtonClick" text="Convert">
          <font>
             <Font size="18.0" />
          </font>
@@ -31,9 +31,9 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="convertFromChoiceBox" layoutX="400.0" layoutY="216.0" onMouseClicked="#getCurrencies" prefWidth="150.0" />
-      <ChoiceBox fx:id="convertToMenu" layoutX="400.0" layoutY="252.0" onMouseClicked="#getCurrencies" prefWidth="150.0" />
+      <ChoiceBox fx:id="convertFromChoiceBox" layoutX="400.0" layoutY="216.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="convertToChoiceBox" layoutX="400.0" layoutY="252.0" prefWidth="150.0" />
       <TextField fx:id="amountTextField" layoutX="401.0" layoutY="179.0" />
-      <Label fx:id="conversionResultTextLabel" layoutX="387.0" layoutY="432.0" text="Label" />
+      <Label fx:id="conversionResultTextLabel" alignment="CENTER" layoutX="133.0" layoutY="390.0" prefHeight="39.0" prefWidth="537.0" text="Label" visible="false" />
    </children>
 </Pane>
