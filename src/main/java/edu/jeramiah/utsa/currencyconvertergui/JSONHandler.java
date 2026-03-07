@@ -21,10 +21,7 @@ public class JSONHandler {
         final File CURRENCIES_JSON = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currencies.json");
         final File CURRENCIES_LIST_TXT = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currency-list.txt");
         final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-        final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(
-                CURRENCIES_JSON,
-                new TypeReference<Map<String, Currency>>(){}
-        );
+        final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(CURRENCIES_JSON, new TypeReference<>() {});
         final ArrayList<Currency> CURRENCIES_ARRAY_LIST = new ArrayList<>(CURRENCY_MAP.values());
 
         try (final BufferedWriter BUFFERED_WRITER = new BufferedWriter(new FileWriter(CURRENCIES_LIST_TXT))) {
