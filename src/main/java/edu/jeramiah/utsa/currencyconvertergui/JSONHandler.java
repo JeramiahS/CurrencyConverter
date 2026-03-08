@@ -13,29 +13,27 @@ import java.util.Map;
  * @author Jeramiah Sanchez
  */
 public class JSONHandler {
+    private static final ArrayList<Currency> CURRENCIES = getCurrenciesListFromJSON();
 
-    /**
-     * Reads the currencies.json file and writes all currencies to a text file as a list of {codes, names}
-     */
-    public static void readCurrenciesToFile () {
+    public static ArrayList<Currency> getCurrencies() {
+        return CURRENCIES;
+    }
+
+    private static ArrayList<Currency> getCurrenciesListFromJSON() {
         final File CURRENCIES_JSON = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currencies.json");
-        final File CURRENCIES_LIST_TXT = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currency-list.txt");
         final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
         final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(CURRENCIES_JSON, new TypeReference<>() {});
-        final ArrayList<Currency> CURRENCIES_ARRAY_LIST = new ArrayList<>(CURRENCY_MAP.values());
+        return new ArrayList<>(CURRENCY_MAP.values());
+    }
 
-        try (final BufferedWriter BUFFERED_WRITER = new BufferedWriter(new FileWriter(CURRENCIES_LIST_TXT))) {
-            for (int i = 0; i < CURRENCIES_ARRAY_LIST.size(); i++) {
-                if (i != CURRENCIES_ARRAY_LIST.size() - 1) {
-                    BUFFERED_WRITER.write(CURRENCIES_ARRAY_LIST.get(i).toString() + "\n");
-                } else {
-                    BUFFERED_WRITER.write(CURRENCIES_ARRAY_LIST.get(i).toString());
-                }
-            }
-        } catch (IOException _) {
-            System.err.println("Error reading:" + CURRENCIES_LIST_TXT.getAbsolutePath());
+    public static ConverterServerResponse parseServerResponse(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws RuntimeException {
+        try(final InputStream INPUT_STREAM = HTTPHandler.sendConversionRequest(AMOUNT, FROM_CODE, TO_CODE)) {
+            final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+            return OBJECT_MAPPER.readValue(INPUT_STREAM, ConverterServerResponse.class);
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Error parsing server response: " + e.getMessage());
         }
-
+        throw new RuntimeException("Error parsing server response");
     }
 
 }
