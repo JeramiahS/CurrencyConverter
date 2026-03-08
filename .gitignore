@@ -40,3 +40,6 @@ build/
 
 ### Ignore generated files ###
 src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/**
+
+### Ignore build outputs ###
+out
