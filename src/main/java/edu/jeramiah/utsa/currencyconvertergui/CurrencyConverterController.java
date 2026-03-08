@@ -76,7 +76,7 @@ public class CurrencyConverterController {
     }
 
     private String extractCurrencyCode(String choiceBoxValue) {
-        final String[] CURRENCY_ATTRIBUTES = choiceBoxValue.split(",");
+        final String[] CURRENCY_ATTRIBUTES = choiceBoxValue.split("-");
         return CURRENCY_ATTRIBUTES[0].trim();
     }
 
