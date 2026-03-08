@@ -22,7 +22,7 @@ public class CurrencyConverterController {
     private Button convertButton;
 
     @FXML
-    private ChoiceBox<?> convertFromChoiceBox;
+    private ChoiceBox<Currency> convertFromChoiceBox;
 
     @FXML
     private Label convertFromLabel;
@@ -31,7 +31,7 @@ public class CurrencyConverterController {
     private Label convertToLabel;
 
     @FXML
-    private ChoiceBox<?> convertToChoiceBox;
+    private ChoiceBox<Currency> convertToChoiceBox;
 
     @FXML
     private Pane mainPane;
@@ -42,16 +42,42 @@ public class CurrencyConverterController {
     @FXML
     private Label conversionResultTextLabel;
 
+    /**
+     * The initialize method will set the text values of the choice boxes
+     */
+    @FXML
+    public void initialize() {
+        convertFromChoiceBox.getItems().addAll(JSONHandler.getCurrencies());
+        convertToChoiceBox.getItems().addAll(JSONHandler.getCurrencies());
+    }
+
+    /**
+     * Sends a conversion request if it passes input checks and displays the result in the GUI
+     *
+     * @param event                 When the node is left-clicked with a mouse
+     * @throws IOException          When an IO error occurs
+     * @throws InterruptedException When the connection to the server is interrupted in any way
+     */
     @FXML
     void onConvertButtonClick(MouseEvent event) throws IOException, InterruptedException {
-        //TODO: Grab amount from amountTextField
-        //TODO: Grab selection from convertFromChoiceBox
-        //TODO: Grab selection from convertToChoiceBox
-        //TODO: Send GET request to converter server
-        //TODO: Parse response JSON
-        //TODO: Display parsed result in GUI
-        //HTTPHandler.sendConversionRequest(amountTextField.getText(), convertFromChoiceBox.getAccessibleText(), convertToMenu.getAccessibleText());
-        conversionResultTextLabel.setText("Conversion Result Placeholder");
+        if (amountTextField.getText().isEmpty() || convertFromChoiceBox.getValue() == null || convertToChoiceBox.getValue() == null) {
+            conversionResultTextLabel.setText("ERROR: One or more values are empty");
+        } else if (amountTextField.getText().equals("0") || !Character.isDigit(amountTextField.getText().charAt(0))) {
+            conversionResultTextLabel.setText("ERROR: Amount must be a non-zero number");
+        } else {
+            final String AMOUNT = amountTextField.getText();
+            final String FROM_CODE = extractCurrencyCode(convertFromChoiceBox.getValue().toString());
+            final String TO_CODE = extractCurrencyCode(convertToChoiceBox.getValue().toString());
+            final ConverterServerResponse SERVER_RESPONSE = JSONHandler.parseServerResponse(AMOUNT, FROM_CODE, TO_CODE);
+            final String RESULT_TEXT = String.format("%s %s is %f %s", AMOUNT, FROM_CODE, SERVER_RESPONSE.result, TO_CODE);
+            conversionResultTextLabel.setText(RESULT_TEXT);
+        }
         conversionResultTextLabel.setVisible(true);
     }
+
+    private String extractCurrencyCode(String choiceBoxValue) {
+        final String[] CURRENCY_ATTRIBUTES = choiceBoxValue.split(",");
+        return CURRENCY_ATTRIBUTES[0].trim();
+    }
+
 }

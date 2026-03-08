@@ -1,6 +1,7 @@
 package edu.jeramiah.utsa.currencyconvertergui;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,8 +16,8 @@ import java.nio.file.Path;
 public class HTTPHandler {
 
     /**
-     * Sends a GET request containing the parameters to convert the given amount of currency.
-     * It stores the response in a JSON file.
+     * Sends a GET request containing the parameters to convert the given amount of currency and returns the
+     * response input stream
      *
      * @param AMOUNT                The amount of money to convert
      * @param FROM_CODE             The currency code to convert from
@@ -24,7 +25,7 @@ public class HTTPHandler {
      * @throws IOException          Thrown when an IO exception occurs
      * @throws InterruptedException Thrown when the connection to the server gets interrupted
      */
-    public static void sendConversionRequest(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws IOException, InterruptedException {
+    public static InputStream sendConversionRequest(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws IOException, InterruptedException {
         try (final HttpClient HTTP_CLIENT = HttpClient.newHttpClient()) {
             final String CURRENCY_CONVERTER_URL = String.format(
                     "https://api.fxratesapi.com/convert?from=%s&to=%s&amount=%s",
@@ -33,7 +34,7 @@ public class HTTPHandler {
                     AMOUNT
             );
             final HttpRequest REQUEST = HttpRequest.newBuilder().uri(URI.create(CURRENCY_CONVERTER_URL)).GET().build();
-            HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofFile(Path.of("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/response.json")));
+            return HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofInputStream()).body();
         }
     }
 
