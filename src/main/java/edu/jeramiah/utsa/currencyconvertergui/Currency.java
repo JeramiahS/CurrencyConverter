@@ -3,6 +3,11 @@ package edu.jeramiah.utsa.currencyconvertergui;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Contains the code and name fields found in the currencies JSON given by the currency converter server
+ *
+ * @author Jeramiah Sanchez
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Currency {
 

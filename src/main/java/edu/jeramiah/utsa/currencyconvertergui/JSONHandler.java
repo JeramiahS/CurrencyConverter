@@ -19,6 +19,10 @@ public class JSONHandler {
         return CURRENCIES;
     }
 
+    /**
+     * Creates an ArrayList from a Map of <code>Currency</code> objects
+     * @return An ArrayList of <code>Currency</code> objects
+     */
     private static ArrayList<Currency> getCurrenciesListFromJSON() {
         final File CURRENCIES_JSON = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currencies.json");
         final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -26,6 +30,15 @@ public class JSONHandler {
         return new ArrayList<>(CURRENCY_MAP.values());
     }
 
+    /**
+     * Receives the server response and parses a <code>ConverterServerResponse</code> object from the input stream
+     *
+     * @param AMOUNT            The amount of money to convert
+     * @param FROM_CODE         The currency code to convert from
+     * @param TO_CODE           The currency code to convert to
+     * @return                  A <code>ConverterServerResponse</code> object
+     * @throws RuntimeException When a runtime exception occurs
+     */
     public static ConverterServerResponse parseServerResponse(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws RuntimeException {
         try(final InputStream INPUT_STREAM = HTTPHandler.sendConversionRequest(AMOUNT, FROM_CODE, TO_CODE)) {
             final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

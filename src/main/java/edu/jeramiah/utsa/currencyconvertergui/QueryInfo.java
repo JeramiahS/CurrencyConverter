@@ -2,6 +2,11 @@ package edu.jeramiah.utsa.currencyconvertergui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Contains the information provided in the GET request to the currency converter server
+ *
+ * @author Jeramiah Sanchez
+ */
 public class QueryInfo {
     @JsonProperty
     public String from;

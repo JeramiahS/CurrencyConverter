@@ -2,6 +2,11 @@ package edu.jeramiah.utsa.currencyconvertergui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Contains all the tags found in the JSON sent by the currency converter server
+ *
+ * @author Jeramiah Sanchez
+ */
 public class ConverterServerResponse {
     @JsonProperty
     public String success;
