@@ -75,6 +75,12 @@ public class CurrencyConverterController {
         conversionResultTextLabel.setVisible(true);
     }
 
+    /**
+     * Extracts the currency code from the String provided by the choiceBox object's selected value
+     *
+     * @param choiceBoxValue    The selected value of the choiceBox object
+     * @return                  A three character currency code
+     */
     private String extractCurrencyCode(String choiceBoxValue) {
         final String[] CURRENCY_ATTRIBUTES = choiceBoxValue.split("-");
         return CURRENCY_ATTRIBUTES[0].trim();
