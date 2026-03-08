@@ -4,39 +4,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.jeramiah.utsa.currencyconvertergui.CurrencyConverterController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #16161D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.jeramiah.utsa.currencyconvertergui.CurrencyConverterController">
    <children>
-      <Button fx:id="convertButton" layoutX="357.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#onConvertButtonClick" text="Convert">
+      <Button fx:id="convertButton" layoutX="357.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#onConvertButtonClick" text="Convert">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="amountLabel" layoutX="286.0" layoutY="178.0" text="Amount:">
+      <Label fx:id="amountLabel" layoutX="304.0" layoutY="181.0" style="-fx-text-fill: white;" text="Amount:">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="convertFromLabel" layoutX="243.0" layoutY="215.0" text="Convert From:">
+      <Label fx:id="convertFromLabel" layoutX="254.0" layoutY="218.0" style="-fx-text-fill: white;" text="Convert From:">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="convertToLabel" layoutX="265.0" layoutY="251.0" text="Convert To:">
+      <Label fx:id="convertToLabel" layoutX="278.0" layoutY="254.0" style="-fx-text-fill: white;" text="Convert To:">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="titleLabel" layoutX="181.0" layoutY="68.0" text="Currency Converter">
+      <Label fx:id="titleLabel" layoutX="176.0" layoutY="71.0" style="-fx-text-fill: white;" text="Currency Converter">
          <font>
-            <Font name="System Bold" size="48.0" />
+            <Font name="Arial Bold" size="48.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="convertFromChoiceBox" layoutX="400.0" layoutY="216.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="convertToChoiceBox" layoutX="400.0" layoutY="252.0" prefWidth="150.0" />
-      <TextField fx:id="amountTextField" layoutX="401.0" layoutY="179.0" />
-      <Label fx:id="conversionResultTextLabel" alignment="CENTER" layoutX="133.0" layoutY="390.0" prefHeight="39.0" prefWidth="537.0" text="Result Text" visible="false">
+      <ChoiceBox fx:id="convertFromChoiceBox" layoutX="416.0" layoutY="216.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="convertToChoiceBox" layoutX="416.0" layoutY="252.0" prefWidth="150.0" />
+      <TextField fx:id="amountTextField" layoutX="416.0" layoutY="179.0" />
+      <Label fx:id="conversionResultTextLabel" alignment="CENTER" layoutX="133.0" layoutY="390.0" prefHeight="39.0" prefWidth="537.0" style="-fx-text-fill: white;" text="Result Text" textFill="WHITE" visible="false">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial" size="18.0" />
          </font></Label>
    </children>
 </Pane>
