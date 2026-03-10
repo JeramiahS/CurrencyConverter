@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
 
 /**
  * HTTPHandler contains the methods to send HTTP Requests to the currency converter server
@@ -14,6 +13,7 @@ import java.nio.file.Path;
  * @author Jeramiah Sanchez
  */
 public class HTTPHandler {
+    private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
     /**
      * Sends a GET request containing the parameters to convert the given amount of currency and returns the
@@ -26,16 +26,14 @@ public class HTTPHandler {
      * @throws InterruptedException Thrown when the connection to the server gets interrupted
      */
     public static InputStream sendConversionRequest(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws IOException, InterruptedException {
-        try (final HttpClient HTTP_CLIENT = HttpClient.newHttpClient()) {
-            final String CURRENCY_CONVERTER_URL = String.format(
-                    "https://api.fxratesapi.com/convert?from=%s&to=%s&amount=%s",
-                    FROM_CODE,
-                    TO_CODE,
-                    AMOUNT
-            );
-            final HttpRequest REQUEST = HttpRequest.newBuilder().uri(URI.create(CURRENCY_CONVERTER_URL)).GET().build();
-            return HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofInputStream()).body();
-        }
+        final String CURRENCY_CONVERTER_URL = String.format(
+                "https://api.fxratesapi.com/convert?from=%s&to=%s&amount=%s",
+                FROM_CODE,
+                TO_CODE,
+                AMOUNT
+        );
+        final HttpRequest REQUEST = HttpRequest.newBuilder().uri(URI.create(CURRENCY_CONVERTER_URL)).GET().build();
+        return HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofInputStream()).body();
     }
 
     /**
@@ -44,12 +42,10 @@ public class HTTPHandler {
      * @throws IOException          Thrown when an IO exception occurs
      * @throws InterruptedException Thrown when the connection to the server gets interrupted
      */
-    public static void sendGetAllCurrenciesRequest() throws IOException, InterruptedException {
-        try (final HttpClient HTTP_CLIENT = HttpClient.newHttpClient()) {
-            final String GET_CURRENCIES_URL = "https://api.fxratesapi.com/currencies";
-            final HttpRequest REQUEST = HttpRequest.newBuilder().uri(URI.create(GET_CURRENCIES_URL)).GET().build();
-            HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofFile(Path.of("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currencies.json")));
-        }
+    public static InputStream sendGetAllCurrenciesRequest() throws IOException, InterruptedException {
+        final String GET_CURRENCIES_URL = "https://api.fxratesapi.com/currencies";
+        final HttpRequest REQUEST = HttpRequest.newBuilder().uri(URI.create(GET_CURRENCIES_URL)).GET().build();
+        return HTTP_CLIENT.send(REQUEST, HttpResponse.BodyHandlers.ofInputStream()).body();
     }
 
 }

@@ -13,21 +13,18 @@ import java.util.Map;
  * @author Jeramiah Sanchez
  */
 public class JSONHandler {
-    private static final ArrayList<Currency> CURRENCIES = getCurrenciesListFromJSON();
-
-    public static ArrayList<Currency> getCurrencies() {
-        return CURRENCIES;
-    }
-
     /**
      * Creates an ArrayList from a Map of <code>Currency</code> objects
      * @return An ArrayList of <code>Currency</code> objects
      */
-    private static ArrayList<Currency> getCurrenciesListFromJSON() {
-        final File CURRENCIES_JSON = new File ("src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/currencies.json");
-        final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-        final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(CURRENCIES_JSON, new TypeReference<>() {});
-        return new ArrayList<>(CURRENCY_MAP.values());
+    public static ArrayList<Currency> getCurrenciesFromResponse() {
+        try(final InputStream INPUT_STREAM = HTTPHandler.sendGetAllCurrenciesRequest()) {
+            final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+            final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(INPUT_STREAM, new TypeReference<>() {});
+            return new ArrayList<>(CURRENCY_MAP.values());
+        } catch (InterruptedException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -42,7 +39,7 @@ public class JSONHandler {
     public static ConverterServerResponse parseServerResponse(final String AMOUNT, final String FROM_CODE, final String TO_CODE) throws RuntimeException {
         try(final InputStream INPUT_STREAM = HTTPHandler.sendConversionRequest(AMOUNT, FROM_CODE, TO_CODE)) {
             final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-            return OBJECT_MAPPER.readValue(INPUT_STREAM, ConverterServerResponse.class);
+            return OBJECT_MAPPER.readValue(INPUT_STREAM, new TypeReference<>() {});
         } catch (IOException | InterruptedException e) {
             System.err.println("Error parsing server response: " + e.getMessage());
         }

@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CurrencyConverterController {
 
@@ -47,8 +48,9 @@ public class CurrencyConverterController {
      */
     @FXML
     public void initialize() {
-        convertFromChoiceBox.getItems().addAll(JSONHandler.getCurrencies());
-        convertToChoiceBox.getItems().addAll(JSONHandler.getCurrencies());
+        final ArrayList<Currency> CURRENCIES_LIST = JSONHandler.getCurrenciesFromResponse();
+        convertFromChoiceBox.getItems().addAll(CURRENCIES_LIST);
+        convertToChoiceBox.getItems().addAll(CURRENCIES_LIST);
     }
 
     /**
