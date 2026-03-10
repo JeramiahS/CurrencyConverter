@@ -16,7 +16,6 @@ public class CurrencyConverterApplication extends Application {
         stage.setTitle("Currency Converter");
         stage.setScene(scene);
         stage.show();
-        HTTPHandler.sendGetAllCurrenciesRequest();
     }
 
 }
