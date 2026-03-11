@@ -1,4 +1,4 @@
-package sanchez.jeramiah.currencyconvertergui;
+package io.github.JeramiahS.currencyconvertergui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package sanchez.jeramiah.currencyconvertergui;
+package io.github.JeramiahS.currencyconvertergui;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;

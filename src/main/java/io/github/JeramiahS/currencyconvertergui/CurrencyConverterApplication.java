@@ -1,4 +1,4 @@
-package sanchez.jeramiah.currencyconvertergui;
+package io.github.JeramiahS.currencyconvertergui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
