@@ -1,5 +1,6 @@
 package io.github.JeramiahS.currencyconvertergui;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -7,21 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author Jeramiah Sanchez
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ConverterServerResponse {
     @JsonProperty
-    public String success;
+    public boolean success;
     @JsonProperty
-    public QueryInfo query;
+    public String error;
     @JsonProperty
-    public InfoData info;
+    public String description;
     @JsonProperty
-    public String historical;
-    @JsonProperty
-    public String date;
-    @JsonProperty
-    public long timestamp;
-    @JsonProperty
-    public double result;
+    public String result;
 
     public ConverterServerResponse() {}
 
