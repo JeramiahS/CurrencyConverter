@@ -1,4 +1,4 @@
-package edu.jeramiah.utsa.currencyconvertergui;
+package sanchez.jeramiah.currencyconvertergui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

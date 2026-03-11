@@ -1,4 +1,4 @@
-package edu.jeramiah.utsa.currencyconvertergui;
+package sanchez.jeramiah.currencyconvertergui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

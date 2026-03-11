@@ -1,4 +1,4 @@
-package edu.jeramiah.utsa.currencyconvertergui;
+package sanchez.jeramiah.currencyconvertergui;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;

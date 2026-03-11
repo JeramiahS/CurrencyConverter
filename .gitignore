@@ -39,7 +39,7 @@ build/
 .DS_Store
 
 ### Ignore generated files ###
-src/main/resources/edu/jeramiah/utsa/currencyconvertergui/files/**
+src/main/resources/sanchez/jeramiah/currencyconvertergui/files/**
 
 ### Ignore build outputs ###
 out
