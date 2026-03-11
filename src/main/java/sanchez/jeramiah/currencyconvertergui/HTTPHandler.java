@@ -1,4 +1,4 @@
-package edu.jeramiah.utsa.currencyconvertergui;
+package sanchez.jeramiah.currencyconvertergui;
 
 import java.io.IOException;
 import java.io.InputStream;
