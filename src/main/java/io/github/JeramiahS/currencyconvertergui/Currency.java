@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Currency {
 
     @JsonProperty
+    public String symbol_native;
+
+    @JsonProperty
     public String code;
 
     @JsonProperty
