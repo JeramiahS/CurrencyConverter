@@ -5,6 +5,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,15 +14,20 @@ import java.util.Map;
  * @author Jeramiah Sanchez
  */
 public class JSONHandler {
+    private static final Map<String, Currency> CURRENCIES_MAP = getCurrenciesFromServerResponse();
+
+    public static Map<String, Currency> getCurrenciesMap() {
+        return CURRENCIES_MAP;
+    }
+
     /**
      * Creates an ArrayList from a Map of <code>Currency</code> objects
      * @return An ArrayList of <code>Currency</code> objects
      */
-    public static ArrayList<Currency> getCurrenciesFromResponse() {
+    private static Map<String, Currency> getCurrenciesFromServerResponse() {
         try(final InputStream INPUT_STREAM = HTTPHandler.sendGetAllCurrenciesRequest()) {
             final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-            final Map<String, Currency> CURRENCY_MAP = OBJECT_MAPPER.readValue(INPUT_STREAM, new TypeReference<>() {});
-            return new ArrayList<>(CURRENCY_MAP.values());
+            return OBJECT_MAPPER.readValue(INPUT_STREAM, new TypeReference<>() {});
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }

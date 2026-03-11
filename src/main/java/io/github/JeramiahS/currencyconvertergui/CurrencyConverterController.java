@@ -9,7 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class CurrencyConverterController {
 
@@ -48,9 +47,8 @@ public class CurrencyConverterController {
      */
     @FXML
     public void initialize() {
-        final ArrayList<Currency> CURRENCIES_LIST = JSONHandler.getCurrenciesFromResponse();
-        convertFromChoiceBox.getItems().addAll(CURRENCIES_LIST);
-        convertToChoiceBox.getItems().addAll(CURRENCIES_LIST);
+        convertFromChoiceBox.getItems().addAll(JSONHandler.getCurrenciesMap().values());
+        convertToChoiceBox.getItems().addAll(JSONHandler.getCurrenciesMap().values());
     }
 
     /**
@@ -70,8 +68,21 @@ public class CurrencyConverterController {
             final String AMOUNT = amountTextField.getText();
             final String FROM_CODE = extractCurrencyCode(convertFromChoiceBox.getValue().toString());
             final String TO_CODE = extractCurrencyCode(convertToChoiceBox.getValue().toString());
-            final ConverterServerResponse SERVER_RESPONSE = JSONHandler.parseServerResponse(AMOUNT, FROM_CODE, TO_CODE);
-            final String RESULT_TEXT = String.format("%s %s is %f %s", AMOUNT, FROM_CODE, SERVER_RESPONSE.result, TO_CODE);
+            final ConverterServerResponse RESPONSE = JSONHandler.parseServerResponse(AMOUNT, FROM_CODE, TO_CODE);
+            final String RESULT_TEXT;
+            if (RESPONSE.success) {
+                RESULT_TEXT = String.format(
+                        "%s%.2f %s is %s%s %s",
+                        JSONHandler.getCurrenciesMap().get(FROM_CODE).symbol_native,
+                        Double.parseDouble(AMOUNT),
+                        FROM_CODE,
+                        JSONHandler.getCurrenciesMap().get(TO_CODE).symbol_native,
+                        RESPONSE.result,
+                        TO_CODE
+                );
+            } else {
+                RESULT_TEXT = String.format("ERROR: %s - %s", RESPONSE.error, RESPONSE.description);
+            }
             conversionResultTextLabel.setText(RESULT_TEXT);
         }
         conversionResultTextLabel.setVisible(true);
